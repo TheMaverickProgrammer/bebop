@@ -22,10 +22,12 @@ type Store interface {
 // UserStore is a bebop user data store interface.
 type UserStore interface {
 	New(authService string, authID string) (int64, error)
+	NewLocal(name string, pass string) (int64, error)
 	Get(id int64) (*User, error)
 	GetMany(ids []int64) (map[int64]*User, error)
 	GetAdmins() ([]*User, error)
 	GetByName(name string) (*User, error)
+	GetByNamePass(name string, pass string) (*User, error)
 	GetByAuth(authService string, authID string) (*User, error)
 	SetName(id int64, name string) error
 	SetBlocked(id int64, blocked bool) error

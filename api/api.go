@@ -55,6 +55,9 @@ func New(config *Config) *Handler {
 	h.router.Get("/comments/{id}", h.handleGetComment)
 	h.router.Delete("/comments/{id}", h.handleDeleteComment)
 
+	h.router.Post("/accounts/login", h.handleAccountLogin)
+	h.router.Post("/accounts/register", h.handleAccountRegister)
+
 	return h
 }
 

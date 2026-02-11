@@ -23,6 +23,18 @@ func (s *userStore) New(authService string, authID string) (int64, error) {
 	return id, err
 }
 
+// Creates a new user with a provided password.
+func (s *userStore) NewLocal(name string, pass string) (int64, error) {
+	var id int64
+
+	err := s.db.QueryRow(
+		`insert into users(created_at, name, password) values ($1, $2, $3) returning id`,
+		time.Now(), name, pass,
+	).Scan(&id)
+
+	return id, err
+}
+
 const selectFromUsers = `
 	select 
 		id, 
@@ -134,6 +146,12 @@ func (s *userStore) GetAdmins() ([]*store.User, error) {
 // GetByName finds a user by name.
 func (s *userStore) GetByName(name string) (*store.User, error) {
 	row := s.db.QueryRow(selectFromUsers+` where name=$1`, name)
+	return s.scanUser(row)
+}
+
+// GetByNamePass finds a user by a matching name and password.
+func (s *userStore) GetByNamePass(name string, pass string) (*store.User, error) {
+	row := s.db.QueryRow(selectFromUsers+` where name=$1, password=$2`, name, pass)
 	return s.scanUser(row)
 }
 
