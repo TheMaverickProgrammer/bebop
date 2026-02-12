@@ -46,20 +46,23 @@ func startServer() {
 	}
 
 	avatarService := avatar.NewService(store.Users(), fileStorage, logger)
-
+	cookiePath := baseURL.Path + "/"
+	mountURL := baseURL.String()
 	apiHandler := api.New(&api.Config{
 		Logger:        logger,
 		Store:         store,
 		JWTService:    jwtService,
 		AvatarService: avatarService,
+		MountURL: mountURL + "/api",
+		CookiePath: cookiePath,
 	})
 
 	oauthHandler := oauth.New(&oauth.Config{
 		Logger:     logger,
 		UserStore:  store.Users(),
 		JWTService: jwtService,
-		MountURL:   baseURL.String() + "/oauth",
-		CookiePath: baseURL.Path + "/",
+		MountURL:   mountURL + "/oauth",
+		CookiePath: cookiePath,
 	})
 
 	oauthProviders, err := initOAuthProviders(cfg, oauthHandler)

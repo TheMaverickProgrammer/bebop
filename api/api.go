@@ -23,6 +23,8 @@ type Config struct {
 	Store         store.Store
 	JWTService    jwt.Service
 	AvatarService avatar.Service
+	CookiePath    string
+	MountURL      string
 }
 
 // Handler handles API requests.
