@@ -41,6 +41,13 @@ Vue.component("bebop-nav", {
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu pull-right">
+	        <li>
+		  <label for="uname">Username:</label>
+		  <input type="text" id="uname" name="uname"><br/>
+		  <label for="pass">Password:</label>
+		  <input type="password" id="pass" name="pass"><br/>
+		  <a href="#" @click.prevent="$parent.login()")Login</a>
+		</li>
                 <li v-for="provider in config.oauth">
                   <a href="#" @click.prevent="$parent.signIn(provider)">
                     <i :class="'icon-s fa fa-' + provider" aria-hidden="true"></i>
