@@ -1,1 +1,5 @@
-vendor/ 
+vendor/
+go.mod
+go.sum
+bebop.exe
+bebop.conf
