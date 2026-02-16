@@ -6,12 +6,12 @@ var migrate = []string{
 			id            bigint            not null auto_increment,
 			name          varchar(50)       default null,
 			created_at    datetime(6)       not null,
-			auth_service  varchar(50)       not null,
-			auth_id       varchar(50)       not null,
+			auth_service  varchar(50)       not null default '',
+			auth_id       varchar(50)       not null default '',
 			blocked       boolean           not null default false,
 			admin         boolean           not null default false,
 			avatar        varchar(50)       not null default '',
-
+                        password      varchar(50)       not null default '', 
 			primary key (id),
 			unique index (name),
 			unique index (auth_service, auth_id)

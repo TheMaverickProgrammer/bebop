@@ -70,6 +70,18 @@ var BebopApp = new Vue({
       window.open("oauth/begin/" + provider, "", "width=800,height=600");
     },
 
+    login: function(uname, pass) {
+      Vue.http.headers.common["Authorization"] = "Bearer " + uname + ":" + pass;
+      this.$http.post("api/v1/accounts/login").then(
+        response => {
+          this.oauthEnd()
+	},
+	response => {
+	  console.log("ERROR: login: " + response.status);
+	}
+      );
+    },
+
     signOut: function() {
       localStorage.removeItem(BEBOP_LOCAL_STORAGE_TOKEN_KEY);
       Vue.http.headers.common["Authorization"] = "";

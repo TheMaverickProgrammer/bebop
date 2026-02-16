@@ -6,11 +6,12 @@ var migrate = []string{
 			id            bigserial    not null primary key,
 			name          text         default null,
 			created_at    timestamptz  not null,
-			auth_service  text         not null,
-			auth_id       text         not null,
+			auth_service  text         not null default '',
+			auth_id       text         not null default '',
 			blocked       boolean      not null default false,
 			admin         boolean      not null default false,
-			avatar        text         not null default ''
+			avatar        text         not null default '',
+			password      text         not null default ''
 		);
 		create unique index on users(lower(name));
 		create unique index on users(auth_service, auth_id);

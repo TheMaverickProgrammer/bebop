@@ -17,6 +17,7 @@ type Store interface {
 	Users() UserStore
 	Topics() TopicStore
 	Comments() CommentStore
+	Reset() error
 }
 
 // UserStore is a bebop user data store interface.

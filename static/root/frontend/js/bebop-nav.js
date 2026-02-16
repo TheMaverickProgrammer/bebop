@@ -43,10 +43,10 @@ Vue.component("bebop-nav", {
               <ul class="dropdown-menu pull-right">
 	        <li>
 		  <label for="uname">Username:</label>
-		  <input type="text" id="uname" name="uname"><br/>
+		  <input type="text" id="uname" v-model="uname" name="uname"><br/>
 		  <label for="pass">Password:</label>
-		  <input type="password" id="pass" name="pass"><br/>
-		  <a href="#" @click.prevent="$parent.login()")Login</a>
+		  <input type="password" id="pass" v-model="pass" name="pass"><br/>
+		  <a href="#" @click.prevent="$parent.login(uname, pass)">Login</a>
 		</li>
                 <li v-for="provider in config.oauth">
                   <a href="#" @click.prevent="$parent.signIn(provider)">
@@ -65,6 +65,9 @@ Vue.component("bebop-nav", {
   props: ["config", "auth"],
 
   data: function() {
-    return {};
+    return {
+	uname: '',
+    	pass: ''
+    };
   },
 });

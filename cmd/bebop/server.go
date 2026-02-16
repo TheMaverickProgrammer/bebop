@@ -153,3 +153,16 @@ func newConfigHandler(title string, oauthProviders []string) (http.HandlerFunc, 
 
 	return handler, nil
 }
+
+func reinstall() {
+        cfg, err := getConfig()
+	if err != nil {
+		logger.Fatalf("failed to load configuration: %s", err)
+	}
+
+	s, err := getStore(cfg)
+	if err != nil {
+		logger.Fatalf("failed to get store: %s", err)
+	}
+	s.Reset()
+}

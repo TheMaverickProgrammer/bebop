@@ -21,9 +21,11 @@ func main() {
 	cmds := map[string]func(){
 		"start":        startServer,
 		"init":         initConfig,
+		"reinit":       reinstall,
 		"gen-key":      genKey,
 		"admins":       printAdmins,
 		"add-admin":    addAdmin,
+		"add-user":     addUser,
 		"remove-admin": removeAdmin,
 		"help":         help,
 	}
@@ -40,10 +42,12 @@ func help() {
 	fmt.Fprintln(os.Stderr, `Usage:
 	bebop start                      - start the server
 	bebop init                       - create an initial configuration file
+	bebop reinit                     - delete the database and create a fresh start
 	bebop gen-key                    - generate a random 32-byte hex-encoded key
 	bebop admins                     - show the admin list
 	bebop add-admin <username>       - add a user to the admin list
 	bebop remove-admin <username>    - remove a user from the admin list
+	bebop add-user <username> <pwd>  - add a new local user account
 	bebop help                       - show this message
 Use -e flag to read configuration from environment variables instead of a file. E.g.:
 	bebop -e start

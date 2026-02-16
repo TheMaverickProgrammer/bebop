@@ -151,7 +151,7 @@ func (s *userStore) GetByName(name string) (*store.User, error) {
 
 // GetByNamePass finds a user by a matching name and password.
 func (s *userStore) GetByNamePass(name string, pass string) (*store.User, error) {
-	row := s.db.QueryRow(selectFromUsers+` where name=$1, password=$2`, name, pass)
+	row := s.db.QueryRow(selectFromUsers+` where name=$1 and password=$2`, name, pass)
 	return s.scanUser(row)
 }
 
